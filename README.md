@@ -31,7 +31,7 @@ pipeline {
  }
 }
 ```
-![Build results](img/Task1_3.png?raw=true "Build results")
+![Build results](img/Task2_1.png?raw=true "Build results")
 
 ---
 
