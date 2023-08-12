@@ -2,3 +2,5 @@
 - [к занятию "8.2. Что такое DevOps. СI/СD"](8-02_CICD/README.md)
 - [к занятию "8.3. GitLab"](8-03_Gitlab/README.md)
 
+- [к занятию "9.1. Обзор систем IT-мониторинга"](SMON/HW1/README.md)
+
