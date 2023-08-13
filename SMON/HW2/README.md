@@ -1,9 +1,9 @@
-# Домашнее задание к занятию "`Обзор систем IT-мониторинга`" - `Гущин Евгений`
+# Домашнее задание к занятию "`Система мониторинга Zabbix`" - `Гущин Евгений`
 
 ### Задание 1
 
-![CPU monitoring 1](../../img/SMON/Task1_1.png?raw=true)
-![CPU monitoring 2](../../img/SMON/Task1_2.png?raw=true)
+![z_login](../../img/SMON/HW2_img/Task1_1.png?raw=true)
+![CPU monitoring 2](../../img/SMON/HW2_img/Task1_2.png?raw=true)
 
 
 ---
