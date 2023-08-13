@@ -1,49 +1,61 @@
-# Домашнее задание к занятию "`Система мониторинга Zabbix`" - `Гущин Евгений`
+# Домашнее задание к занятию "`Система мониторинга Zabbix. Часть 2`" - `Гущин Евгений`
 
 ### Задание 1
 
-```bash
-apt update
-apt install postgresql
-
-wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-4+ubuntu22.04_all.deb
-dpkg -i zabbix-release_6.0-4+ubuntu22.04_all.deb
-apt update
-
-apt install zabbix-server-pgsql zabbix-frontend-php php8.1-pgsql zabbix-apache-conf zabbix-sql-scripts
-
-su - postgres -c 'psql --command "CREATE USER zabbix WITH PASSWORD '\'MY_PASSWORD\'';"'
-su - postgres -c 'psql --command "CREATE DATABASE zabbix OWNER zabbix;"'
-
-sed -i 's/# DBPassword=/DBPassword=MY_PASSWORD/g' /etc/zabbix/zabbix_server.conf
-
-systemctl restart zabbix-server apache2
-systemctl enable zabbix-server apache2
-```
-
-![z_login](../../img/SMON/HW2_img/Task1_1.png?raw=true)
-![z_login 2](../../img/SMON/HW2_img/Task1_2.png?raw=true)
+![template1](../../img/SMON/HW3_img/Task1_1.png?raw=true)
+![template2](../../img/SMON/HW3_img/Task1_2.png?raw=true)
 
 
 ---
 
-### Задание 2
+### Задание 2-3
 
-```bash
-wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-4+ubuntu22.04_all.deb
-dpkg -i zabbix-release_6.0-4+ubuntu22.04_all.deb
-apt update
+![Hosts](../../img/SMON/HW3_img/Task2_1.png?raw=true)
 
-apt install zabbix-agent
+---
 
-sudo sed -i 's/Server=127.0.0.1/Server=10.129.0.0\/24/g' /etc/zabbix/zabbix_agentd.conf
+### Задание 4
 
-systemctl restart zabbix-agent
-systemctl enable zabbix-agent
+![Dashboard](../../img/SMON/HW3_img/Task4_1.png?raw=true)
+
+---
+
+### Задание 5
+
+![map1](../../img/SMON/HW3_img/Task5_1.png?raw=true)
+![map2](../../img/SMON/HW3_img/Task5_2.png?raw=true)
+
+---
+
+### Задание 7
+
+```python
+import sys 
+import os 
+import re 
+from datetime import date
+
+if (sys.argv[1] == '-ping'): # Если -ping 
+    result=os.popen("ping -c 1 " + sys.argv[2]).read() # Делаем пинг по заданному адресу  
+    result=re.findall(r"time=(.*) ms", result) # Выдёргиваем из результата время  
+    print(result[0]) # Выводим результат в консоль 
+elif (sys.argv[1] == '-simple_print'): # Если simple_print  
+    print(sys.argv[2]) # Выводим в консоль содержимое sys.arvg[2] 
+elif (sys.argv[1] == '1'):
+    print("Гущин Евгений Александрович")
+elif (sys.argv[1] == '2'):
+    today = date.today()
+    print(today)
+else: # Во всех остальных случаях 
+    print(f"unknown input: {sys.argv[1]}") # Выводим непонятый запрос в консоль
 ```
 
-![Hosts](../../img/SMON/HW2_img/Task2_1.png?raw=true)
-![Log Ubuntu 1](../../img/SMON/HW2_img/Task2_2.png?raw=true)
-![Log Ubuntu master](../../img/SMON/HW2_img/Task2_3.png?raw=true)
-![Monitoring Master](../../img/SMON/HW2_img/Task2_4.png?raw=true)
-![Monitoring Ubuntu1](../../img/SMON/HW2_img/Task2_5.png?raw=true)
+![task7_1](../../img/SMON/HW3_img/Task7_1.png?raw=true)
+![task7_2](../../img/SMON/HW3_img/Task7_2.png?raw=true)
+
+---
+
+### Задание 8
+
+![discovery1](../../img/SMON/HW3_img/Task8_1.png?raw=true)
+![discovery2](../../img/SMON/HW3_img/Task8_2.png?raw=true)
