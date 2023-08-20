@@ -17,7 +17,7 @@
 ### Задание 3
 
 ![Task3_1](../../img/SMON/HW5_img/Task3_1.png?raw=true)
-![Task3_2](../../img/SMON/HW5_img/Task3_3.png?raw=true)
+![Task3_2](../../img/SMON/HW5_img/Task3_2.png?raw=true)
 
 ---
 
