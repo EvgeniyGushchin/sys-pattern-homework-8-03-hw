@@ -5,3 +5,5 @@
 - [к занятию "9.1. Обзор систем IT-мониторинга"](SMON/HW1/README.md)
 - [к занятию "9.2. Система мониторинга Zabbix"](SMON/HW2/README.md)
 
+- [к занятию "10.1. Disaster recovery и Keepalived"](9_FaultTolerance/FHRP/README.md)
+
