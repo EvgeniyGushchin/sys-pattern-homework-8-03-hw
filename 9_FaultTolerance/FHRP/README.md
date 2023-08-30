@@ -24,8 +24,8 @@ fi
 ```
 ---
 Конфиг keepalived
-```json
-lobal_defs {
+```bash
+global_defs {
   script_user egushchin
   enable_script_security
 }
