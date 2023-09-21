@@ -6,4 +6,4 @@
 - [к занятию "9.2. Система мониторинга Zabbix"](SMON/HW2/README.md)
 
 - [к занятию "10.1. Disaster recovery и Keepalived"](9_FaultTolerance/FHRP/README.md)
-
+- [к занятию "10.2. Кластеризация и балансировка нагрузки"](9_FaultTolerance/balancing/README.md)
