@@ -2,7 +2,9 @@
 
 ### Задание 1
 
-![task1](../../img/SMON/HW4_img/Task1.png?raw=true)
+[HAPROXY.cfg](haproxy.cfg)
+![task1](../../img/9_FaultTolerance/HW2/Task1_1.png?raw=true)
+![task1](../../img/9_FaultTolerance/HW2/Task1_2.png?raw=true)
 
 ---
 
