@@ -1,59 +1,64 @@
-# Домашнее задание к занятию "`Disaster recovery и Keepalived`" - `Гущин Евгений`
+# Домашнее задание к занятию "`Резервное копирование»`" - `Гущин Евгений`
 
 ### Задание 1
 
-![task1](../../img/9_FaultTolerance/HW1/Task1_1.png?raw=true)
-![task1](../../img/9_FaultTolerance/HW1/Task1_2.png?raw=true)
+![task1](../../img/9_FaultTolerance/HW3/Task1_1.png?raw=true)
 
 ---
 
 ### Задание 2
 
-Скрипт для проверки порта и наличия файла
+Скрипт для для создания бэкапов
 ```bash
 #!/bin/bash
 
-nc -zv localhost 80 &>/dev/null
+user=''
 
-if [[ $? -eq 0 ]] &&  [[ -f "/var/www/html/index.html" ]];
+if [[ $1 ]]
 then
-   exit 0
+  user=$1
 else
-   exit 1
+  user="$(whoami)"
 fi
+
+if [[ ! -d "/home/${user}" ]]
+then
+  echo "Directory /home/${user} DOES NOT exists."
+  exit 0
+fi
+
+rsync -ac --delete --exclude '.*' /home/$user/ /tmp/backup/$user
 ```
 ---
-Конфиг keepalived
+Crontab
 ```bash
-global_defs {
-  script_user egushchin
-  enable_script_security
-}
-vrrp_script nginx_test {
-   script "/etc/keepalived/test.sh"
-   interval 3
-}
-vrrp_instance VI_1 {
-    state MASTER
-    interface enp0s2
-    virtual_router_id 100
-    priority 101
-    advert_int 1
-
-    virtual_ipaddress {
-      192.168.123.100/24
-    }
-
-    track_process {
-      nginx_test
-    }
-}
+0 15 * * * /home/ubuntu/script.sh 2>&1 | /usr/bin/logger -t CRONOUTPUT
 ```
 
-![task2](../../img/9_FaultTolerance/HW1/Task2_1.png?raw=true)
-![task2](../../img/9_FaultTolerance/HW1/Task2_2.png?raw=true)
-![task2](../../img/9_FaultTolerance/HW1/Task2_3.png?raw=true)
-![task2](../../img/9_FaultTolerance/HW1/Task2_4.png?raw=true)
-![task2](../../img/9_FaultTolerance/HW1/Task2_5.png?raw=true)
-![task2](../../img/9_FaultTolerance/HW1/Task2_6.png?raw=true)
+![task2](../../img/9_FaultTolerance/HW3/Task2_1.png?raw=true)
+![task2](../../img/9_FaultTolerance/HW3/Task2_2.png?raw=true)
+![task2](../../img/9_FaultTolerance/HW3/Task2_3.png?raw=true)
 
+### Задание 3
+
+![task3](../../img/9_FaultTolerance/HW3/Task3_1.png?raw=true)
+
+### Задание 4
+
+[backup.sh](backup.sh)
+[restore.sh](restore.sh)
+
+Папка с бэкапами
+![task4](../../img/9_FaultTolerance/HW3/Task4_1.png?raw=true)
+
+Запускаем бэкап
+![task4](../../img/9_FaultTolerance/HW3/Task4_2.png?raw=true)
+
+Самый старый бэкап удален
+![task4](../../img/9_FaultTolerance/HW3/Task4_3.png?raw=true)
+
+Удаляем папку http1
+![task4](../../img/9_FaultTolerance/HW3/Task4_4.png?raw=true)
+
+Восстанавливаем из бэкапа
+![task4](../../img/9_FaultTolerance/HW3/Task4_5.png?raw=true)
