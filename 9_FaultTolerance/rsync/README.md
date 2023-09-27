@@ -28,6 +28,10 @@ then
 fi
 
 rsync -ac --delete --exclude '.*' /home/$user/ /tmp/backup/$user
+
+EXITCODE=$?
+test $EXITCODE -eq 0 && echo "Backup completed" || echo "Backup failed";
+exit $EXITCODE
 ```
 ---
 Crontab
