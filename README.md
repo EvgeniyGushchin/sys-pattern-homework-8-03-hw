@@ -7,4 +7,6 @@
 
 - [к занятию "10.1. Disaster recovery и Keepalived"](9_FaultTolerance/FHRP/README.md)
 - [к занятию "10.2. Кластеризация и балансировка нагрузки"](9_FaultTolerance/balancing/README.md)
-- [к занятию "10.3. Резервное копирование»"](9_FaultTolerance/rsync/README.md)
+- [к занятию "10.3. Резервное копирование"](9_FaultTolerance/rsync/README.md)
+- [к занятию "10.4. Отказоустойчивость в облаке"](9_FaultTolerance/cloud/README.md)
+
