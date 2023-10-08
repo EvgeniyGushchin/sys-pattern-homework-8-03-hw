@@ -10,3 +10,5 @@
 - [к занятию "10.3. Резервное копирование"](9_FaultTolerance/rsync/README.md)
 - [к занятию "10.4. Отказоустойчивость в облаке"](9_FaultTolerance/cloud/README.md)
 
+- [к занятию "11.2. Кеширование Redis/memcached"](11_DataStorage/redis/README.md)
+
