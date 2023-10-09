@@ -2,23 +2,22 @@
 
 ### Задание 1
 
-[Playbook](Task1)
-![task1](../../img/9_FaultTolerance/HW4/Task1_1.png?raw=true)
-![task1](../../img/9_FaultTolerance/HW4/Task1_2.png?raw=true)
-![task1](../../img/9_FaultTolerance/HW4/Task1_3.png?raw=true)
+ - Улучшение производительности веб-сайтов (кеширование статики)
+ - Снижение нагрузки на серверы
+ - Улучшение производительности приложений
+ - Снижение использования сетевых ресурсов
+ - Поддержание доступности данных в оффлайн-режиме
+ - Сокращение нагрузки на сторонние сервисы
 
 ---
 
 ### Задание 2
 
-[Playbook](Task2)
-
-![task2](../../img/9_FaultTolerance/HW4/Task2_1.png?raw=true)
-![task2](../../img/9_FaultTolerance/HW4/Task2_1.1.png?raw=true)
-![task2](../../img/9_FaultTolerance/HW4/Task2_2.png?raw=true)
-![task2](../../img/9_FaultTolerance/HW4/Task2_3.png?raw=true)
+![task1](../../img/11_DataStorage/HW2/Task2_1.png)
 
 ### Задание 3
+
+![task1](../../img/11_DataStorage/HW2/Task3_1.png)
 
 ### Задание 4
 
@@ -28,4 +27,8 @@ do
         echo "$key => $(redis-cli get $key)"
 done
 ```
+![task1](../../img/11_DataStorage/HW2/Task4_1.png)
+
 ### Задание 5
+
+![task1](../../img/11_DataStorage/HW2/Task5_1.png)
