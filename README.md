@@ -11,4 +11,5 @@
 - [к занятию "10.4. Отказоустойчивость в облаке"](9_FaultTolerance/cloud/README.md)
 
 - [к занятию "11.2. Кеширование Redis/memcached"](11_DataStorage/redis/README.md)
+- [к занятию "11.3. ELK"](11_DataStorage/elk/README.md)
 
