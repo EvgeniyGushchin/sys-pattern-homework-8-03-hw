@@ -1,11 +1,8 @@
-# Домашнее задание к занятию "`«Кеширование Redis/memcached`" - `Гущин Евгений`
+# Домашнее задание к занятию "`«ELK`" - `Гущин Евгений`
 
 ### Задание 1
 
-[Playbook](Task1)
-![task1](../../img/9_FaultTolerance/HW4/Task1_1.png?raw=true)
-![task1](../../img/9_FaultTolerance/HW4/Task1_2.png?raw=true)
-![task1](../../img/9_FaultTolerance/HW4/Task1_3.png?raw=true)
+![task1](../../img/11_DataStorage/HW3/Task1.png?raw=true)
 
 ---
 
