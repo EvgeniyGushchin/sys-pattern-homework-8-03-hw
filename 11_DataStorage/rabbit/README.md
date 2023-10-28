@@ -19,6 +19,3 @@
 ![task2](../../img/11_DataStorage/HW4/Task3_5.png)
 ![task2](../../img/11_DataStorage/HW4/Task3_6.png)
 ![task2](../../img/11_DataStorage/HW4/Task3_7.png)
-
-
-![task1](../../img/11_DataStorage/HW2/Task5_1.png)
