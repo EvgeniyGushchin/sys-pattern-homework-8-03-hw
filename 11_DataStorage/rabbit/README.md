@@ -1,34 +1,24 @@
-# Домашнее задание к занятию "`«Кеширование Redis/memcached`" - `Гущин Евгений`
+# Домашнее задание к занятию "`Очереди RabbitMQ»`" - `Гущин Евгений`
 
 ### Задание 1
 
- - Улучшение производительности веб-сайтов (кеширование статики)
- - Снижение нагрузки на серверы
- - Улучшение производительности приложений
- - Снижение использования сетевых ресурсов
- - Поддержание доступности данных в оффлайн-режиме
- - Сокращение нагрузки на сторонние сервисы
-
+![task1](../../img/11_DataStorage/HW4/Task1.png)
 ---
 
 ### Задание 2
 
-![task1](../../img/11_DataStorage/HW2/Task2_1.png)
+![task2](../../img/11_DataStorage/HW4/Task2_1.png)
+![task2](../../img/11_DataStorage/HW4/Task2_2.png)
 
 ### Задание 3
 
-![task1](../../img/11_DataStorage/HW2/Task3_1.png)
+![task2](../../img/11_DataStorage/HW4/Task3_1.png)
+![task2](../../img/11_DataStorage/HW4/Task3_2.png)
+![task2](../../img/11_DataStorage/HW4/Task3_3.png)
+![task2](../../img/11_DataStorage/HW4/Task3_4.png)
+![task2](../../img/11_DataStorage/HW4/Task3_5.png)
+![task2](../../img/11_DataStorage/HW4/Task3_6.png)
+![task2](../../img/11_DataStorage/HW4/Task3_7.png)
 
-### Задание 4
-
-```bash
-for key in $(redis-cli --scan)
-do
-        echo "$key => $(redis-cli get $key)"
-done
-```
-![task1](../../img/11_DataStorage/HW2/Task4_1.png)
-
-### Задание 5
 
 ![task1](../../img/11_DataStorage/HW2/Task5_1.png)
