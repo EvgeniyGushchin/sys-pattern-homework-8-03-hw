@@ -14,3 +14,7 @@
 - [к занятию "11.3. ELK"](11_DataStorage/elk/README.md)
 - [к занятию "11.4. Очереди RabbitMQ"](11_DataStorage/rabbit/README.md)
 
+- [к занятию "12.1. Базы данных"](12_RDB/12_01/README.md)
+- [к занятию "12.2. Работа с данными (DDL/DML)"](12_RDB/12_02/README.md)
+- [к занятию "12.3. SQL. Часть 1"](12_RDB/12_03/README.md)
+
