@@ -1,0 +1,51 @@
+version: '3.3'
+services:
+  database_master:
+    image: arm64v8/mysql:latest
+    restart: always
+    container_name: mysql-master
+    env_file: .env
+    environment:
+      - TZ:${TZ}
+      - MYSQL_USER:${MYSQL_USER}
+      - MYSQL_PASSWORD:${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD:${MYSQL_PASSWORD}
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - mysqldata_master:/var/lib/mysql
+      - ./master/master.cnf:/etc/my.cnf
+    networks:
+      - mysqlnetwork
+  
+  database_slave:
+    image: arm64v8/mysql:latest
+    restart: always
+    container_name: mysql-slave
+    env_file: .env
+    environment:
+      - TZ:${TZ}
+      - MYSQL_USER:${MYSQL_USER}
+      - MYSQL_PASSWORD:${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD:${MYSQL_PASSWORD}
+    ports:
+      - '3307:3306'
+    expose:
+      - '3307'
+    volumes:
+      - mysqldata_slave:/var/lib/mysql
+      - ./slave/slave.cnf:/etc/my.cnf
+    networks:
+      - mysqlnetwork
+  
+    
+    
+networks:
+  mysqlnetwork:
+    
+# Names our volumes
+volumes:
+  mysqldata_slave:
+  mysqldata_master:
