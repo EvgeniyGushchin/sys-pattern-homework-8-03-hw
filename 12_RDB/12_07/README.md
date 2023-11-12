@@ -64,15 +64,17 @@
 
 [Docker](./sharding/docker-compose.yml)
 
-Настройка для одной таблицы **Shops** 
+Настройка для одной таблицы **Shops**
 
-Подключаем экстенсшн
+Подключаем экстенсшн.
 Заводим удаленный сервер и маппинг для пользователя
+
 ```sql
 CREATE EXTENSION postgres_fdw;
 CREATE SERVER db_2_server FOREIGN DATA WRAPPER postgres_fdw OPTIONS (host '172.21.10.12', port '5432', dbname 'testdb');
 CREATE USER MAPPING FOR postgres SERVER db_2_server OPTIONS (user 'postgres', password '12345');
 ```
+Создаем удаленную таблицу **shops_other**
 ```sql
 CREATE FOREIGN TABLE shops_other ( 
         id      INTEGER NOT NULL, 
@@ -83,7 +85,7 @@ SERVER db_2_server
 OPTIONS (schema_name 'public', table_name 'shops');
 ```
 
-Создаем таблицу **shops** на всех нодах
+Создаем таблицу **shops_1**
 ```sql
 CREATE TABLE 
     shops_1
@@ -120,7 +122,7 @@ CREATE RULE shops_insert_other AS ON INSERT TO shops
 	WHERE (city_id != 1)
 DO INSTEAD INSERT INTO shops_other VALUES (NEW.*);
 ```
-остальные правила создается по аналогии
+остальные правила создаются по аналогии
 
 для проверки сделаем INSERT
 ```sql
