@@ -1,0 +1,41 @@
+version: '3.3'
+services:
+  database_psql1:
+    image: arm64v8/postgres:latest
+    restart: always
+    container_name: psql1
+    ports:
+      - '5432:5432'
+    expose:
+      - '5432'
+    environment:
+      POSTGRES_PASSWORD: 12345
+    networks:
+      pysql_network:
+        ipv4_address: 172.21.10.11
+  
+  database_psql2:
+    image: arm64v8/postgres:latest
+    restart: always
+    container_name: psql2
+    environment:
+      POSTGRES_PASSWORD: 12345
+    networks:
+      pysql_network:
+        ipv4_address: 172.21.10.12
+  
+    
+    
+networks:
+  pysql_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.10.0/24
+          gateway: 172.21.10.1
+      
+    
+# Names our volumes
+volumes:
+  mysqldata_master1:
+  mysqldata_master2:
