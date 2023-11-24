@@ -6,7 +6,7 @@
 
 ![task1](../../img/12_RDB/HW9/Task1_1)
 
-![task1](../../img/12_RDB/HW9/Task1_2)
+![task1](../../img/12_RDB/HW9/Task1_0.png)
 ![task1](../../img/12_RDB/HW9/Task1_3)
 ![task1](../../img/12_RDB/HW9/Task1_4)
 ![task1](../../img/12_RDB/HW9/Task1_5)
