@@ -2,7 +2,7 @@
 
 ### Задание 1
 
-![task1](../../img/12_RDB/HW9/Task1_0)
+![task1](../../img/12_RDB/HW7/Task1_0.png)
 ![task1](../../img/12_RDB/HW9/Task1_1)
 ![task1](../../img/12_RDB/HW9/Task1_2)
 ![task1](../../img/12_RDB/HW9/Task1_3)
