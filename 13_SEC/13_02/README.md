@@ -4,7 +4,7 @@
 
 
 ![task1](../../img/13_SEC/HW2/Task1_1.png)
-![task1](../../img/13_SEC/HW2/Task1_1.png)
+![task1](../../img/13_SEC/HW2/Task1_2.png)
 
 ---
 
