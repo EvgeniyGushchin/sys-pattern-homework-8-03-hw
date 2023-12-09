@@ -16,9 +16,9 @@ https://www.exploit-db.com/exploits/46024
 
 ### Задание 2
 
-![task2](../../img/13_SEC/HW2/Task1_2.png)
-![task2](../../img/13_SEC/HW2/Task1_3.png)
-![task2](../../img/13_SEC/HW2/Task1_4.png)
+![task2](../../img/13_SEC/HW1/Task1_2.png)
+![task2](../../img/13_SEC/HW1/Task1_3.png)
+![task2](../../img/13_SEC/HW1/Task1_4.png)
 
 
 -sS:   
