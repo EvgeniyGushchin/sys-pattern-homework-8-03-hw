@@ -7,7 +7,7 @@
 
 ---
 
-### Задание 2
+### Задание 3
 
 2. [compose.yaml](https://github.com/EvgeniyGushchin/shvirtd-example-python/blob/main/compose.yaml)
 
@@ -17,31 +17,34 @@
 
 ---
 
-### Задание 3
-
-![task3](../../img/14-Virt/HW4/3_1.png)  
-![task3](../../img/14-Virt/HW4/3_2.png)  
-![task3](../../img/14-Virt/HW4/3_3.png)  
-![task3](../../img/14-Virt/HW4/3_4.png)  
-![task3](../../img/14-Virt/HW4/3_5.png)  
-![task3](../../img/14-Virt/HW4/3_6.png)  
-
----
-
 ### Задание 4
 
-С запуском centos и debian на Маке с М1 чипом возникли трудности пожтому воспользовался образом из первого задания
+1. скрипт [start.sh](https://github.com/EvgeniyGushchin/sys-pattern-homework-8-03-hw/blob/main/14-Virt/HW5/start.sh)
+2. форк https://github.com/EvgeniyGushchin/shvirtd-example-python.git
 
-![task3](../../img/14-Virt/HW4/4_1.png)  
-![task3](../../img/14-Virt/HW4/4_2.png)  
+![task2](../../img/14-Virt/HW5/task5-4.png)  
+
 
 ---
 
-### Задание 5
+### Задание 6
 
-![task3](../../img/14-Virt/HW4/5_1.png)  
-![task3](../../img/14-Virt/HW4/5_2.png)  
-![task3](../../img/14-Virt/HW4/5_3.png)  
-![task3](../../img/14-Virt/HW4/5_4.png)  
+`docker run -rm -it -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest hashicorp/terraform:latest`
 
-При удалении одного compose файла, связанный с ним контейнер при выполнении команды `docker compose up -d` помечается как orphan(сирота) и предлагается удалить такой контейнер выполнив команду с ключом `--remove-orphans`
+![task2](../../img/14-Virt/HW5/task6-1.png) 
+![task2](../../img/14-Virt/HW5/task6-2.png) 
+
+---
+
+### Задание 6.1
+
+```bash
+docker run --name test hashicorp/terraform:latest
+docker cp test:/bin/terraform .
+```
+
+![task2](../../img/14-Virt/HW5/task6-3.png) 
+
+
+
+
