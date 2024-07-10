@@ -5,9 +5,9 @@
 2. personal.auto.tfvars
 3. "result": "9nmCqkPUsw2l3bjp"
 4. 
-	4.1 все блоки `resource` должны иметь две метки. Не хватает метки
-	4.2 имена могут начинаться только с буквы или с символа `_`. Имя `1nginx` недопустимое
-	4.3 `random_password.random_string_FAKE.resulT` - нет такого ресурса `random_string_FAKE`
+	- 4.1 все блоки `resource` должны иметь две метки. Не хватает метки
+	- 4.2 имена могут начинаться только с буквы или с символа `_`. Имя `1nginx` недопустимое
+	- 4.3 `random_password.random_string_FAKE.resulT` - нет такого ресурса `random_string_FAKE`
 5.
 ```tf
 resource "docker_image" "nginx" {
