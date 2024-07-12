@@ -18,7 +18,45 @@
 
 ### Задание 2
 
-![task2](../../img/15-Terraform/HW1/task1_5.png)
+![task2](../../img/15-Terraform/HW2/task2_1.png)
+
+---
+
+### Задание 3
+
+![task2](../../img/15-Terraform/HW2/task3_1.png)
+
+---
+
+### Задание 4
+
+![task2](../../img/15-Terraform/HW2/task4_1.png)
+
+---
+
+### Задание 5
+
+![task2](../../img/15-Terraform/HW2/task5_1.png)
+
+---
+
+### Задание 6
+
+![task2](../../img/15-Terraform/HW2/task6_1.png)
+
+---
+
+### Задание 7
+
+![task2](../../img/15-Terraform/HW2/task7_1.png)
+
+---
+
+### Задание 8
+
+![task2](../../img/15-Terraform/HW2/task8_1.png)
+
+---
 
 [main.tf](./main.tf)
 
