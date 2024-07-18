@@ -33,7 +33,7 @@ local:
 ```
 
 11. `ansible-playbook -i inventory/prod.yml site.yml --ask-vault-pass --ask-pass` 
-![task2](../../img/16-Ansible/HW1/task9.png) 
+![task2](../../img/16-Ansible/HW1/task11.png) 
 ---
 
 
