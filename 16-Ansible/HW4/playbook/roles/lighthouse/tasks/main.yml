@@ -1,0 +1,33 @@
+---
+- name: Install git
+  become: true
+  apt:
+    name: git
+    state: present
+
+- name: Install nginx
+  become: true
+  apt:
+    name: nginx
+    state: present
+
+- name: Copy Nginx config
+  become: true
+  template:
+    src: "{{ nginx_template }}"
+    dest: "{{ nginx_config_file }}"
+    mode: 0644
+
+- name: Get LightHouse
+  become: true
+  ansible.builtin.git:
+    repo: "{{ lighthouse_url }}"
+    dest: "{{ lighthouse_dir }}"
+    version: master
+- name: Copy LightHouse config
+  become: true
+  template:
+    src: "{{ lighthouse_template }}"
+    dest: "{{ lighthouse_config_file }}"
+    mode: 0644
+  notify: Start nginx service

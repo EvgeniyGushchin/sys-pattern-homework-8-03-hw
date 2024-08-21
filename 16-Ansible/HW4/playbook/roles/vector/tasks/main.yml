@@ -1,0 +1,39 @@
+---
+- name: Get vector distrib
+  ansible.builtin.get_url:
+    url: "https://packages.timber.io/vector/{{ vector_version }}/vector_{{ vector_version }}-1_{{ vector_arch }}.deb"
+    dest: "./vector_{{ vector_version }}_{{ vector_arch }}.deb"
+    mode: "0644"
+- name: Install vector
+  become: true
+  ansible.builtin.apt:
+    deb: "./vector_{{ vector_version }}_{{ vector_arch }}.deb"
+- name: Copy config
+  tags:
+    - config
+  become: true
+  ansible.builtin.template:
+    src: "{{ vector_template }}"
+    dest: "{{ vector_config_file }}"
+    mode: "0644"
+  notify: Restart vector service
+- name: Use the right config_file
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/default/vector
+    line: "VECTOR_CONFIG={{ vector_config_file }}"
+    state: present
+
+- name: Add vector user to systemd-journal group
+  ansible.builtin.user:
+    name: vector
+    groups: systemd-journal
+    append: true
+  when: add_vector_journal_group | default('no')
+  notify: Start vector service
+- name: Start Vector
+  become: true
+  ansible.builtin.service:
+    state: started
+    enabled: true
+    name: vector

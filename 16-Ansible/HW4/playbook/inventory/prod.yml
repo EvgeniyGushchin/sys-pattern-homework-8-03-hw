@@ -1,0 +1,9 @@
+---
+netology:
+  hosts:
+    clickhouse:
+      ansible_host: 89.169.168.67
+    vector:
+      ansible_host: 89.169.174.247
+    lighthouse:
+      ansible_host: 89.169.175.116
