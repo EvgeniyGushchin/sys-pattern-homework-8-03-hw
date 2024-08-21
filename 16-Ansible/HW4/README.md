@@ -24,7 +24,7 @@
 10. playbook здесь [Playbook](./playbook)
 
 11. Роль "vector-role": https://github.com/EvgeniyGushchin/vector-role  
-  Роль "lighthouse-role": https://github.com/Adel-pro/lighthouse-role.git
+  Роль "lighthouse-role": https://github.com/EvgeniyGushchin/lighthouse-role.git
 
 
 
