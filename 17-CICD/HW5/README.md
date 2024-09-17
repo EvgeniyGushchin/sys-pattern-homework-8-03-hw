@@ -17,7 +17,7 @@
 6. В pom.xml поменял ссылки на репозиторий и nexus.
 
 7. Запустил сборку по master, убедился, что всё прошло успешно и артефакт появился в nexus:
-![task2](../../img/17-CICD/HW5/task1_2.png)  
+![task2](../../img/17-CICD/HW5/task2.png)  
 
 8. Мигрировал build configuration в репозиторий.
 
