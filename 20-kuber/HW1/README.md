@@ -24,12 +24,14 @@
 ![task2](../../img/20-kuber/HW1/task6_1.png)  
 
 2. Настроил подключение к кластеру
-![task2](../../img/20-kuber/HW1/task6_2.png)  
+   
+![task2](../../img/20-kuber/HW1/task6_2.png)
 
-3. Пробросил порты
+
+4. Пробросил порты
 ![task2](../../img/20-kuber/HW1/task6_3.png)  
 
-4. Подключился к дашборду
+5. Подключился к дашборду
 ![task2](../../img/20-kuber/HW1/task6_6.png)  
 
 ![task2](../../img/20-kuber/HW1/task6_4.png)  
