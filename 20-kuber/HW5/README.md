@@ -27,7 +27,7 @@
 
 3. Проверил доступ к nginx и multitool по доменному имени
 
-![task2](../../img/20-kuber/HW4/task2_3.png)  
+![task2](../../img/20-kuber/HW5/task2_3.png)  
 
 
 
