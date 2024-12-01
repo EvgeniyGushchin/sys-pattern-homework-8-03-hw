@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: nt_mul
+  name: log-multitool
+spec:
+  selector:
+    matchLabels:
+      app: nt_mul
+  template:
+    metadata:
+      labels:
+        app: nt_mul
+    spec:
+      containers:
+        - name: multitool
+          image: wbitt/network-multitool:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: HTTP_PORT
+              value: "8080"
+          volumeMounts:
+            - name: vol
+              mountPath: /logs/syslog
+              subPath: syslog
+              readOnly: true
+      volumes:
+        - name: vol
+          hostPath:
+            path: /var/log
