@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: net-front
+  labels:
+    app: nt_app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nt_app
+  template:
+    metadata:
+      labels:
+        app: nt_app
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: net-multitool
+  labels:
+    app: nt_app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nt_app
+  template:
+    metadata:
+      labels:
+        app: nt_app
+    spec:
+      containers:
+        - name: multitool
+          image: wbitt/network-multitool:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: HTTP_PORT
+              value: "8080"
