@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "my-chart.fullname" . }}
+  labels:
+    app: {{ include "my-chart.fullname" . }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app: {{ include "my-chart.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "my-chart.fullname" . }}
+    spec:
+      containers:
+        - name: {{ include "my-chart.fullname" . }}
+          image: {{ .Values.image.name }}:{{ .Values.image.tag }}
