@@ -1,0 +1,16 @@
+#cloud-config
+ssh_pwauth: no
+users:
+ - name: ubuntu
+   groups: sudo
+   shell: /bin/bash
+   sudo: ['ALL=(ALL) NOPASSWD:ALL']
+   ssh-authorized-keys:
+    - "your key"
+runcmd:
+  - |
+    export PUBLIC_IPV4=$(curl ifconfig.me)
+    export HOST=$(hostname)
+    echo "<html><body><h1>Welcome to LAMP!</h1><label>instance ${HOST}, IP Address: ${PUBLIC_IPV4}</label><div><img src='https://egushchin-bucket.website.yandexcloud.net' width='500' height='500'></div></body></html>" > /var/www/html/index.html
+    systemctl restart apache2
+    EOF
