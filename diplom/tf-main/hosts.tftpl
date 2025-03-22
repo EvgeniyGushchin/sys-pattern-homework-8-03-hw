@@ -1,0 +1,29 @@
+---
+all:
+  hosts:
+    %{~ for node in nodes ~}
+    ${node["name"]}:
+      ansible_host: ${node["network_interface"][0]["nat_ip_address"] == "" ? node["network_interface"][0]["ip_address"] : node["network_interface"][0]["nat_ip_address"]}
+      ip: ${node["network_interface"][0]["ip_address"]}
+    %{~ endfor ~}
+  children:
+    kube_control_plane:
+      hosts:
+        ${nodes[0]["name"]}:
+    kube_node:
+      hosts:
+      %{~ for i, node in nodes ~}
+        %{~ if i > 0 ~}       
+        ${node["name"]}:
+        %{~ endif ~}
+      %{~ endfor ~}
+    
+    etcd:
+      hosts:
+         ${nodes[0]["name"]}:
+    k8s_cluster:
+      children:
+        kube_control_plane:
+        kube_node:
+    calico_rr:
+      hosts: {}
