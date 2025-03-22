@@ -48,3 +48,59 @@ backend "s3" {
 ![img](./img/cloud1.png)
 
 ![img](./img/cloud2.png)
+
+и инвентори файл для развертывания кластера
+
+```yaml
+---
+all:
+  hosts:
+    node-0:
+      ansible_host: 158.160.55.84
+      ip: 10.10.1.9
+    node-1:
+      ansible_host: 130.193.55.213
+      ip: 10.10.2.13
+    node-2:
+      ansible_host: 84.201.180.124
+      ip: 10.10.3.21
+  children:
+    kube_control_plane:
+      hosts:
+        node-0:
+    kube_node:
+      hosts:
+        node-1:
+        node-2:
+    
+    etcd:
+      hosts:
+         node-0:
+    k8s_cluster:
+      children:
+        kube_control_plane:
+        kube_node:
+    calico_rr:
+      hosts: {}
+```
+
+### Создание Kubernetes кластера
+
+Для развертывания кластера использовал *kubespray* и созданный на предидущем этапе инвентори файл.
+
+1. Установил зависимости для *kubespray*:
+
+```pip install -r requirements.txt```
+
+2. Также в настройках поменял версию кубера с 1.31 на 1.30. Более свежая версия не хотела устанавливаться. Возможно надо поиграть с версиями *kubespray* и *ansible* 
+
+![img](./img/kube0.png)
+
+3. Скопировал инвентори файл и запустил установку
+```bash
+ansible-playbook -i inventory/mycluster/hosts.yaml -u ubuntu --become --become-user=root cluster.yml
+```
+
+4. Кластер установился
+![img](./img/ans1.png)
+
