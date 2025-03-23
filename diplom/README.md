@@ -272,3 +272,101 @@ resource "null_resource" "update_k8s_cluster_yml" {
 изменения автоматически публикуются
 
 ![img](./img/cicd3.png)
+
+6. На отдельной машине поднял atlantis. Для этого создал образ из официального с версией Terrform 1.9.8
+
+```
+FROM ghcr.io/runatlantis/atlantis:latest
+
+ARG TERRAFORM_VERSION=1.9.8
+
+USER root
+
+RUN wget https://hashicorp-releases.yandexcloud.net/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
+    unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
+    mv terraform /usr/local/bin/ && \
+    rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+
+RUN terraform version
+
+WORKDIR /home/atlantis/.atlantis
+
+ENTRYPOINT ["atlantis"]
+```
+
+и поднял его через docker
+
+```bash
+sudo docker run \
+  -d \
+  --name atlantis \
+  -p 4141:4141 \
+  -e ATLANTIS_REPO_ALLOWLIST="github.com/EvgeniyGushchin/atlantis_terraform" \
+  -e ATLANTIS_URL="http://158.160.110.188:4141" \
+  -e ATLANTIS_GH_USER="EvgeniyGushchin" \
+  -e ATLANTIS_GH_TOKEN="******" \
+  -e ATLANTIS_SECRET="***" \
+  -e ATLANTIS_LOG_LEVEL="debug" \
+  -v "/home/egushchin/atalntis:/home/atlantis/.atlantis" \
+  -e YC_TOKEN="***" \
+  -e YC_CLOUD_ID="***" \
+  -e YC_FOLDER_ID="******" \
+  -e ATLANTIS_API_SECRET="secret" \
+  egushchin555/atlantis-custom:latest server --repo-config="./repos.yaml"
+```
+
+![img](./img/atlantis0.png)
+
+7. Создал репозиторий terraform, выложил в репозиторий рабочие файлы terraform и создал файл atlantis.yaml в корне репозитория:
+
+```yml
+version: 3
+projects:
+  - name: my-project
+    dir: tf-main
+    terraform_version: v1.9.8
+    autoplan:
+      enabled: true
+      when_modified: ["*.tf", "*.tfvars"]
+    workflow: default
+
+workflows:
+  default:
+    plan:
+      steps:
+        - init
+        - plan
+    apply:
+      steps:
+        - apply
+
+```
+
+8. Настроил Webhooks в репозитории terraform
+
+![img](./img/atlantis3.png)
+
+9. Перезапустил контейнер Atlantis, внес незначительные изменения в tf-файлы в репозитории, убедился, что webhook сработал и atlantis применил изменения
+
+![img](./img/atlantis1.png)
+![img](./img/atlantis2.png)
+
+
+
+
+1. [Весь код в ветке Diplom](https://github.com/EvgeniyGushchin/sys-pattern-homework-8-03-hw/blob/diplom/diplom/README.md)
+
+2. 
+![img](./img/atlantis2.png)
+![img](./img/atlantis4.png)
+
+3. [Ansible тут](https://github.com/EvgeniyGushchin/sys-pattern-homework-8-03-hw/tree/diplom/diplom/ansible)
+
+4. [sample app](https://github.com/EvgeniyGushchin/netology_sample_app/tree/main)
+[image](https://hub.docker.com/r/egushchin555/diplom_app)
+
+5. [Terraform для поднятия кластера](https://github.com/EvgeniyGushchin/sys-pattern-homework-8-03-hw/tree/diplom/diplom/tf-main)
+
+6. Ссылка на тестовое приложение и веб интерфейс Grafana с данными доступа.
+ - http://158.160.137.86 - демо приложение
+ - http://158.160.137.86:3000 - Графана (admin - 123456)
