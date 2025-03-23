@@ -49,12 +49,18 @@ variable "subnet-zones" {
   default = [ "ru-central1-a", "ru-central1-b", "ru-central1-d" ]
 }
 
-variable "cidr" {
-  type = map(list(string))
-  default = {
-    "cidr" = [ "10.10.1.0/24", "10.10.2.0/24", "10.10.3.0/24" ]
-  }
+variable "private-cidr" {
+  type = list(string)
+  default = [ "10.10.1.0/24", "10.10.2.0/24", "10.10.3.0/24" ]
 }
 
+variable "public-cidr" {
+  type    = list(string)
+  default = ["192.168.1.0/24"]
+}
 
-
+variable "nat_ip" {
+  type        = string
+  default     = "192.168.1.254"
+  description = "NAT instance IP"
+}

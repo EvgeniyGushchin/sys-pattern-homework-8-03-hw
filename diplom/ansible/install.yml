@@ -1,0 +1,9 @@
+---
+- name: Prepare to install kuber cluster
+  ansible.builtin.import_playbook: prepare.yml
+
+- name: Install kuber cluster
+  ansible.builtin.import_playbook: kubespray/cluster.yml
+
+- name: Work with configs
+  ansible.builtin.import_playbook: config.yml

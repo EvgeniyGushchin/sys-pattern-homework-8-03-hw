@@ -1,10 +1,17 @@
 ---
 all:
+  vars:
+    ansible_ssh_user: ubuntu
+    ansible_ssh_private_key_file: ~/.ssh/id_ed25519
+    ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "{{ ansible_ssh_user }}"@${nat_instance["network_interface"][0]["nat_ip_address"]} -i "{{ ansible_ssh_private_key_file }}""'
+    become: true
+    ansible_python_interpreter: /usr/bin/python3
   hosts:
     %{~ for node in nodes ~}
     ${node["name"]}:
       ansible_host: ${node["network_interface"][0]["nat_ip_address"] == "" ? node["network_interface"][0]["ip_address"] : node["network_interface"][0]["nat_ip_address"]}
       ip: ${node["network_interface"][0]["ip_address"]}
+      access_ip: ${node["network_interface"][0]["ip_address"]}
     %{~ endfor ~}
   children:
     kube_control_plane:
