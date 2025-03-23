@@ -1,8 +1,8 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: test-app
-  namespace: netology
   labels:
     app: test-app
 spec:
@@ -12,27 +12,9 @@ spec:
       app: test-app
   template:
     metadata:
-      namespace: netology
       labels:
         app: test-app
     spec:
       containers:
       - name: test-app-site
         image: egushchin555/diplom_app:latest
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: test-app-svc
-  namespace: netology
-spec:
-  selector:
-    app: test-app
-  ports:
-    - name: http
-      protocol: TCP
-      port: 80
-      nodePort: 31080
-  type: NodePort

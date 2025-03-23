@@ -7,3 +7,9 @@
 
 - name: Work with configs
   ansible.builtin.import_playbook: config.yml
+
+- name: Install monitoring tools
+  ansible.builtin.import_playbook: install-monitoring.yml
+
+- name: Deploy app
+  ansible.builtin.import_playbook: deploy-app.yml

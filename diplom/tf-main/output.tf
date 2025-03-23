@@ -12,6 +12,6 @@ output "external_ip_address_nodes" {
   }
 }
 
-# output "load_balancer_ip" {
-#   value = one(yandex_lb_network_load_balancer.k8s_lb.listener).external_address_spec
-# }
+output "load_balancer_ip" {
+  value = one(one(yandex_lb_network_load_balancer.nlb-k8s.listener).external_address_spec).address
+}

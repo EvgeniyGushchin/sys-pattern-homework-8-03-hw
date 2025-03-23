@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app
+  labels:
+    app: test-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containers:
+        - name: test-app-site
+          image: egushchin555/diplom_app:latest
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-app-svc
+  labels:
+    app: test-app
+spec:
+  selector:
+    app: test-app
+  ports:
+    - name: test-app-http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 32200
+  type: NodePort

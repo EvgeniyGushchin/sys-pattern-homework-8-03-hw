@@ -3,22 +3,22 @@ all:
   vars:
     ansible_ssh_user: ubuntu
     ansible_ssh_private_key_file: ~/.ssh/id_ed25519
-    ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "{{ ansible_ssh_user }}"@89.169.141.102 -i "{{ ansible_ssh_private_key_file }}""'
+    ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "{{ ansible_ssh_user }}"@84.252.131.235 -i "{{ ansible_ssh_private_key_file }}""'
     become: true
     ansible_python_interpreter: /usr/bin/python3
   hosts:
     node-0:
-      ansible_host: 10.10.1.32
-      ip: 10.10.1.32
-      access_ip: 10.10.1.32
+      ansible_host: 10.10.1.4
+      ip: 10.10.1.4
+      access_ip: 10.10.1.4
     node-1:
-      ansible_host: 10.10.2.6
-      ip: 10.10.2.6
-      access_ip: 10.10.2.6
+      ansible_host: 10.10.2.7
+      ip: 10.10.2.7
+      access_ip: 10.10.2.7
     node-2:
-      ansible_host: 10.10.3.32
-      ip: 10.10.3.32
-      access_ip: 10.10.3.32
+      ansible_host: 10.10.3.9
+      ip: 10.10.3.9
+      access_ip: 10.10.3.9
   children:
     kube_control_plane:
       hosts:

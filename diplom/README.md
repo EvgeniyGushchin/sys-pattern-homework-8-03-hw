@@ -155,3 +155,120 @@ FROM --platform=linux/amd64 nginx:latest
 
 ![img](./img/app3.png)
 
+### Подготовка cистемы мониторинга и деплой приложения
+
+1. Подготовил playbook для развертывания системы мониторинга
+- [install-monitoring.yml](./ansible/install-monitoring.yml) 
+
+2. Переопредил сервис и политики доступа к Grafana:
+- [grafana-networkpolicy.yml](./ansible/grafana-networkpolicy.yml) 
+- [grafana-service.yml](./ansible/grafana-service.yml) 
+
+3. Для доступа к Grafana и проиложению из внешней сети создал [балансировщик](./tf-main/balancer.tf) 
+
+4. Для деплоя приложения создал:
+- [deployment для приложения](./ansible/app_deployment.yml)
+- [сервис для приложения](./ansible/app_service.yml)
+- [playbook для приложения](./ansible/deploy-app.yml)
+
+5. Добавил в основной playbook задачи для развертывания систем мониторинга и приложения
+```yml
+---
+- name: Prepare to install kuber cluster
+  ansible.builtin.import_playbook: prepare.yml
+
+- name: Install kuber cluster
+  ansible.builtin.import_playbook: kubespray/cluster.yml
+
+- name: Work with configs
+  ansible.builtin.import_playbook: config.yml
+
+- name: Install monitoring tools
+  ansible.builtin.import_playbook: install-monitoring.yml
+
+- name: Deploy app
+  ansible.builtin.import_playbook: deploy-app.yml
+```
+
+6. После примения изменений `terraform apply` создался балансировщик
+
+![img](./img/monitoring1.png)
+
+7. Через баласировщик получил доступ к Grafana и приложению
+
+![img](./img/monitoring2.png)
+![img](./img/monitoring3.png)
+
+### Установка и настройка CI/CD
+
+Для CI/CD использовал GitHub Action в [репозитории с приложением](https://github.com/EvgeniyGushchin/netology_sample_app). 
+
+1. В репозитории приложения добавил секреты:
+- DOCKERHUB_TOKEN
+- DOCKERHUB_USERNAME
+- KUBECONFIG
+
+![img](./img/cicd1.png)
+
+2. Создал workflow файл [ci-cd.yml](.application/.github/workflows/ci-cd.yml)
+
+3. Так как кластер в приватной сети добавил баласнировщик для доступа к нему:
+```
+resource "yandex_lb_target_group" "nlb-k8s" {
+  name = "nlb-k8s"
+  target {
+    subnet_id = yandex_compute_instance.vm-instance.0.network_interface.0.subnet_id
+    address   = yandex_compute_instance.vm-instance.0.network_interface.0.ip_address
+  }
+}
+
+
+resource "yandex_lb_network_load_balancer" "nlb-k8s" {
+  name = "nlb-k8s"
+  listener {
+    name        = "k8s-access"
+    port        = 32400
+    target_port = 6443
+    external_address_spec {
+      ip_version = "ipv4"
+    }
+  }
+
+
+  attached_target_group {
+    target_group_id = yandex_lb_target_group.nlb-k8s.id
+    healthcheck {
+      name = "healthcheck-k8s"
+      tcp_options {
+        port = 6443
+      }
+    }
+  }
+  depends_on = [yandex_lb_target_group.nlb-k8s]
+}
+```
+
+![img](./img/cicd4.png)
+
+4. Также добавил этап изменения настройки кластера, чтобы ip балансировщика попадал в `supplementary_addresses_in_ssl_keys` кластера
+
+```
+resource "null_resource" "update_k8s_cluster_yml" {
+  depends_on = [
+    local_file.hosts_templatefile,
+    yandex_lb_network_load_balancer.nlb-k8s,
+  ]
+  provisioner "local-exec" {
+    command = <<EOT
+      sed -i '' 's/supplementary_addresses_in_ssl_keys:.*/supplementary_addresses_in_ssl_keys: ["${one(one(yandex_lb_network_load_balancer.nlb-k8s.listener).external_address_spec).address}"]/' ../ansible/kubespray/inventory/mycluster/group_vars/k8s_cluster/k8s-cluster.yml
+    EOT
+  }
+}
+```
+
+5. Проверил работу изменяя index.html
+![img](./img/cicd2.png)
+
+изменения автоматически публикуются
+
+![img](./img/cicd3.png)
