@@ -131,3 +131,17 @@ resource "null_resource" "installation" {
 ![img](./img/kube2.png)
 ![img](./img/kube3.png)
 
+### Создание тестового приложения
+
+1. Подготовил:
+- [nginx.conf](./application/configuration/nginx.conf) 
+- [index.html](./application/content/index.html) 
+- [Dockrfile](./application/Dockrfile) 
+
+2. В файле Докер пришлось указать платформу потому, что сборка шла на `arm64`, а запуск предполагается на `amd64`
+```
+FROM --platform=linux/amd64 nginx:latest 
+```
+
+3. Собираем образ из Dockerfile
+![img](./img/app0.png)
