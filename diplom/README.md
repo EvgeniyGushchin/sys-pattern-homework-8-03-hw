@@ -54,16 +54,25 @@ backend "s3" {
 ```yaml
 ---
 all:
+  vars:
+    ansible_ssh_user: ubuntu
+    ansible_ssh_private_key_file: ~/.ssh/id_ed25519
+    ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "{{ ansible_ssh_user }}"@89.169.141.102 -i "{{ ansible_ssh_private_key_file }}""'
+    become: true
+    ansible_python_interpreter: /usr/bin/python3
   hosts:
     node-0:
-      ansible_host: 158.160.55.84
-      ip: 10.10.1.9
+      ansible_host: 10.10.1.32
+      ip: 10.10.1.32
+      access_ip: 10.10.1.32
     node-1:
-      ansible_host: 130.193.55.213
-      ip: 10.10.2.13
+      ansible_host: 10.10.2.6
+      ip: 10.10.2.6
+      access_ip: 10.10.2.6
     node-2:
-      ansible_host: 84.201.180.124
-      ip: 10.10.3.21
+      ansible_host: 10.10.3.32
+      ip: 10.10.3.32
+      access_ip: 10.10.3.32
   children:
     kube_control_plane:
       hosts:
@@ -96,11 +105,28 @@ all:
 
 ![img](./img/kube0.png)
 
-3. Скопировал инвентори файл и запустил установку
-```bash
-ansible-playbook -i inventory/mycluster/hosts.yaml -u ubuntu --become --become-user=root cluster.yml
+3. Добавил:
+- [install.yml](./ansible/install.yml) для развертывания кластера
+- [prepare.yml](./ansible/prepare.yml) для ожидания ВМ кластера
+- [config.yml](./ansible/config.yml) работа с конфиг файлом после развертывания кластера
+
+3. В [ansible.tf](./tf-main/ansible.tf) добавил шаг по запуску `ansible-playbook`
+```
+resource "null_resource" "installation" {
+  depends_on = [
+    local_file.hosts_templatefile,
+  ]
+
+  provisioner "local-exec" {
+    command = "export ANSIBLE_HOST_KEY_CHECKING=False; ansible-playbook -i ../ansible/kubespray/inventory/mycluster/hosts.yaml -u ubuntu --become --become-user=root ../ansible/install.yml"
+  }
+
+}
 ```
 
-4. Кластер установился
+4. После отработки Ansible, кластер установился
 ![img](./img/ans1.png)
+
+![img](./img/kube2.png)
+![img](./img/kube1.png)
 
