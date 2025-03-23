@@ -145,3 +145,13 @@ FROM --platform=linux/amd64 nginx:latest
 
 3. Собираем образ из Dockerfile
 ![img](./img/app0.png)
+
+4. Проверил, что образ рабочий запустив его в контейнере
+
+![img](./img/app2.png)
+![img](./img/app1.png)
+
+5. Запушил образ в Докер-Хаб
+
+![img](./img/app3.png)
+
