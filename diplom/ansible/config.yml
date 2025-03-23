@@ -2,16 +2,32 @@
 - name: Kube configuration
   hosts: kube_control_plane
   become: yes
-  tasks:
-    - name: Prepare .kube dir
-      file:
-        path: "~/.kube"
+  gather_facts: false
+
+  tasks:  
+    - name: Get user home directory
+      getent:
+        database: passwd
+        key: "{{ ansible_user }}"
+      register: user_info
+
+    - name: Extract home directory from user_info
+      set_fact:
+        home_dir: "{{ user_info.ansible_facts.getent_passwd.ubuntu[4] }}"
+
+    - name: Make directory for config
+      ansible.builtin.file:
+        path: "{{ home_dir }}/.kube"
         state: directory
         mode: '0755'
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
 
-    - name: Copy conf file
-      copy:
-        remote_src: yes
-        src: /etc/kubernetes/admin.conf
-        dest: ~/.kube/config
-        mode: '0644'
+    - name: Copy config
+      ansible.builtin.copy:
+        remote_src: true
+        src: "/etc/kubernetes/admin.conf"
+        dest: "{{ home_dir }}/.kube/config"
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        
