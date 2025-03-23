@@ -127,6 +127,7 @@ resource "null_resource" "installation" {
 4. После отработки Ansible, кластер установился
 ![img](./img/ans1.png)
 
-![img](./img/kube2.png)
 ![img](./img/kube1.png)
+![img](./img/kube2.png)
+![img](./img/kube3.png)
 
